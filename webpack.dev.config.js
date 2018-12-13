@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack')
 const commonConfig = require('./webpack.common.config.js');
 
+
+
 const devConfig = {
     devtool: 'inline-source-map',
     entry: {
@@ -17,10 +19,25 @@ const devConfig = {
         filename: '[name].[hash].js'
     },
     module: {
-        rules: [{
+        rules: [
+            {
             test: /\.(css|scss)$/,
-            use: ["style-loader", "css-loader", "postcss-loader"]
-        }]
+            use: [
+                {loader:"style-loader"},
+                {loader:"css-loader",options:{module:true}}, 
+                {loader:"postcss-loader"},
+                
+                ]
+            },{
+                test:/\.less$/,
+                use:[
+                    {loader:"style-loader"},
+                    {loader:"css-loader"}, 
+                    {loader:"postcss-loader"},
+                    {loader:"less-loader"}
+                ]
+            }
+        ]
     },
     plugins:[
         new webpack.DefinePlugin({

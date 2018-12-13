@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { increment, decrement, reset } from 'actions/counter';
-
+import {bindActionCreators} from 'redux';
 // import { connect } from 'react-redux';
 import {connect} from 'react-redux';
 class Counter extends Component {
@@ -31,9 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        increment: () => {
-            dispatch(increment())
-        },
+        increment: bindActionCreators(increment,dispatch),
         decrement: () => {
             dispatch(decrement())
         },
